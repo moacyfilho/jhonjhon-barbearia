@@ -4,16 +4,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#d4af37">
+    <link rel="canonical" href="https://jhonjhonbarbearia.com.br">
+    <link rel="icon" type="image/png" href="logo.png">
     <title>Jhon Jhon Barbearia | Estilo e Precisão Premium no São Raimundo, Manaus</title>
     <meta name="description"
         content="Barbearia premium em Manaus, bairro São Raimundo. Especialistas em corte masculino, degradê e barba com acabamento na navalha. Agende agora seu horário.">
+    <meta name="keywords"
+        content="barbearia manaus, barbeiro são raimundo, corte masculino manaus, degradê manaus, barba navalha, jhon jhon barbearia">
 
     <!-- Open Graph -->
     <meta property="og:title" content="Jhon Jhon Barbearia | Premium no São Raimundo">
     <meta property="og:description"
         content="Sua melhor versão começa aqui. Agende seu horário na barbearia mais sofisticada do São Raimundo.">
-    <meta property="og:image" content="logo.png">
+    <meta property="og:image" content="https://jhonjhonbarbearia.com.br/logo.png">
+    <meta property="og:url" content="https://jhonjhonbarbearia.com.br">
     <meta property="og:type" content="website">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Jhon Jhon Barbearia | Premium no São Raimundo">
+    <meta name="twitter:description"
+        content="Sua melhor versão começa aqui. Agende seu horário na barbearia mais sofisticada do São Raimundo.">
+    <meta name="twitter:image" content="https://jhonjhonbarbearia.com.br/logo.png">
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -118,7 +132,111 @@
         .gold-text {
             background: var(--gold-gradient);
             -webkit-background-clip: text;
+            background-clip: text;
             -webkit-text-fill-color: transparent;
+            color: transparent;
+        }
+
+        /* Sticky Navbar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 15px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1500;
+            background: transparent;
+            transition: var(--transition-fast);
+        }
+
+        .navbar.scrolled {
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.5);
+            padding: 10px 5%;
+        }
+
+        .navbar .nav-logo img {
+            height: 45px;
+            transition: var(--transition-fast);
+        }
+
+        .navbar.scrolled .nav-logo img {
+            height: 35px;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--white);
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            transition: var(--transition-fast);
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gold-gradient);
+            transition: var(--transition-fast);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover {
+            color: var(--gold);
+        }
+
+        .nav-cta {
+            padding: 10px 24px !important;
+            background: var(--gold-gradient);
+            color: var(--black) !important;
+            border-radius: 2px;
+            font-weight: 700 !important;
+        }
+
+        .nav-cta::after {
+            display: none !important;
+        }
+
+        .nav-cta:hover {
+            color: var(--black) !important;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            z-index: 1600;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 25px;
+            height: 2px;
+            background: var(--gold);
+            transition: var(--transition-fast);
         }
 
         img {
@@ -300,8 +418,9 @@
         }
 
         .whatsapp-float:hover {
-            transform: scale(1.1) rotate(10deg);
+            transform: scale(1.1);
             background: #128c7e;
+            box-shadow: 0 10px 30px rgba(37, 211, 102, 0.5);
         }
 
         @keyframes pulse {
@@ -868,6 +987,33 @@
 
         /* Responsive */
         @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 70%;
+                height: 100vh;
+                background: rgba(10, 10, 10, 0.98);
+                backdrop-filter: blur(20px);
+                flex-direction: column;
+                justify-content: center;
+                gap: 35px;
+                transition: right 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+                padding: 40px;
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .nav-links a {
+                font-size: 1.1rem;
+            }
+
             .hero-ctas {
                 flex-direction: column;
                 width: 100%;
@@ -893,19 +1039,38 @@
                 height: 50px;
                 font-size: 24px;
             }
+
+            .plan-card.best-seller {
+                transform: scale(1);
+            }
         }
     </style>
 </head>
 
 <body>
 
+    <!-- Sticky Navbar -->
+    <nav class="navbar" id="navbar" role="navigation" aria-label="Menu principal">
+        <a href="#" class="nav-logo">
+            <img src="logo.png" alt="Jhon Jhon Barbearia">
+        </a>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#services">Serviços</a></li>
+            <li><a href="#jhon-club">Planos</a></li>
+            <li><a href="#location">Localização</a></li>
+            <li><a href="https://jhonjhonbarbearia.com.br/agendamento" target="_blank" class="nav-cta">Agendar</a></li>
+        </ul>
+        <div class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Abrir menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
     <!-- Floating WhatsApp -->
     <a href="https://wa.me/5592985950190?text=Olá! Quero agendar um horário na Jhon Jhon Barbearia."
         class="whatsapp-float" target="_blank" aria-label="Agendar no WhatsApp">
-        <svg width="30" height="30" viewBox="0 0 24 24" fill="currentColor">
-            <path
-                d="M12.031 6.172c-2.32 0-4.518.892-6.193 2.512C4.162 10.306 3.25 12.446 3.25 14.7c0 2.253.912 4.392 2.588 6.014a8.6 8.6 0 0 0 6.193 2.512c2.321 0 4.519-.892 6.194-2.512 1.675-1.622 2.588-3.761 2.588-6.014 0-2.254-.913-4.394-2.588-6.015-1.675-1.62-3.873-2.513-6.194-2.513zm0 15.025c-1.856 0-3.614-.714-4.954-2.011a6.85 6.85 0 0 1-2.071-4.814c0-1.802.73-3.512 2.071-4.814 1.34-1.296 3.098-2.01 4.954-2.01s3.614.714 4.954 2.01c1.341 1.302 2.071 3.012 2.071 4.814 0 1.802-.73 3.512-2.071 4.814-1.34 1.297-3.098 2.011-4.954 2.011zM15.385 14.05c-.18-.09-.94-.46-1.085-.515-.145-.055-.25-.09-.355.09-.105.18-.415.515-.51.62s-.19.125-.37.035c-.18-.09-.76-.28-1.445-.89-.535-.475-.895-1.065-1-1.245-.105-.18-.01-.275.08-.365.1-.09.18-.21.27-.315.09-.105.125-.18.19-.29s.03-.225-.015-.315c-.045-.09-.355-.86-.49-.1.18-.135.13-.265.13-.355s-.09-.17-.18-.315-.1-.21-.315-.245s-.415-.09-.6.2lc-.185.185-.18.19c-.195.195-.49.51-.49 1.15s.46 1.25.53 1.34c.07.09.91 1.39 2.2 1.95.31.13.55.21.74.27.31.1.59.09.81.05.25-.04.77-.32.88-.63s.105-.59.075-.63c-.03-.04-.11-.07-.29-.16z" />
-        </svg>
+        <i class="fab fa-whatsapp"></i>
     </a>
 
     <!-- Hero Section -->
@@ -923,40 +1088,7 @@
         </div>
     </header>
 
-    <!-- Booking Modal -->
-    <div id="bookingModal" class="modal">
-        <div class="modal-content glass-card">
-            <span class="close-modal" onclick="closeBooking()">&times;</span>
-            <div class="section-header" style="margin-bottom: 30px;">
-                <span class="section-subtitle">Reserva</span>
-                <h2 style="font-size: 1.5rem;">Agendar <span class="gold-text">Horário</span></h2>
-            </div>
-            <form id="bookingForm">
-                <div class="form-group">
-                    <label>Nome Completo</label>
-                    <input type="text" id="name" class="form-control" required placeholder="Seu nome">
-                </div>
-                <div class="form-group">
-                    <label>Serviço</label>
-                    <select id="service" class="form-control" required>
-                        <option value="Corte Masculino Premium">Corte Masculino Premium</option>
-                        <option value="Degradê / Fade de Precisão">Degradê / Fade de Precisão</option>
-                        <option value="Barba e Toalha Quente">Barba e Toalha Quente</option>
-                        <option value="Combo (Cabelo + Barba)">Combo (Cabelo + Barba)</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>Data</label>
-                    <input type="date" id="date" class="form-control" required>
-                </div>
-                <div class="form-group">
-                    <label>Horário</label>
-                    <input type="time" id="time" class="form-control" required>
-                </div>
-                <button type="submit" class="btn btn-primary" style="width: 100%;">Confirmar e Vincular Agenda</button>
-            </form>
-        </div>
-    </div>
+
 
     <!-- Differentials -->
     <section class="differentials">
@@ -1299,11 +1431,14 @@
                     title="Facebook">
                     <i class="fab fa-facebook-f"></i>
                 </a>
+                <a href="https://wa.me/5592985950190" target="_blank" class="social-icon" title="WhatsApp">
+                    <i class="fab fa-whatsapp"></i>
+                </a>
             </div>
             <p style="margin-top: 40px;">Jhon Jhon Barbearia - Excelência e Sofisticação</p>
             <p>R. Jerônimo Ribeiro, 58 - São Raimundo, Manaus - AM</p>
             <p>(92) 98595-0190</p>
-            <p style="margin-top: 40px; color: #333;">&copy; 2025 Jhon Jhon Barbearia. Todos os direitos reservados.</p>
+            <p style="margin-top: 40px; color: #333;">&copy; 2026 Jhon Jhon Barbearia. Todos os direitos reservados.</p>
         </div>
     </footer>
 
@@ -1341,9 +1476,12 @@
         // Smooth Scroll for Internal Links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
-                e.preventDefault();
                 const targetId = this.getAttribute('href');
-                if (targetId === '#') return;
+                if (targetId === '#' || !targetId.startsWith('#')) return;
+                e.preventDefault();
+
+                // Close mobile menu if open
+                document.getElementById('navLinks').classList.remove('active');
 
                 document.querySelector(targetId).scrollIntoView({
                     behavior: 'smooth'
@@ -1351,14 +1489,29 @@
             });
         });
 
-        // Hero Parallax Effect (Simple)
+        // Navbar scroll effect + parallax
+        const navbar = document.getElementById('navbar');
         window.addEventListener('scroll', () => {
             const scroll = window.pageYOffset;
+
+            // Navbar background
+            if (scroll > 80) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+
+            // Hero Parallax
             const heroBg = document.querySelector('.hero-bg-anim');
             if (heroBg) {
                 heroBg.style.transform = `scale(${1 + scroll / 5000}) translateY(${scroll / 10}px)`;
             }
         });
+
+        // Hamburger Menu Toggle
+        function toggleMenu() {
+            document.getElementById('navLinks').classList.toggle('active');
+        }
 
         // Booking Section Logic
         const setMinDate = (id) => {
